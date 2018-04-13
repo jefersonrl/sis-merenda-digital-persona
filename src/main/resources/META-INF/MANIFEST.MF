@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+mode: development
+Built-By: jefersonr
+Class-Path: jasperreports-6.3.0.jar commons-beanutils-1.9.0.jar common
+ s-collections-3.2.2.jar commons-digester-2.1.jar commons-logging-1.1.
+ 1.jar itext-2.1.7.js5.jar bcmail-jdk14-138.jar bcprov-jdk14-138.jar b
+ ctsp-jdk14-1.38.jar bcprov-jdk14-1.38.jar bcmail-jdk14-1.38.jar jcomm
+ on-1.0.23.jar jfreechart-1.0.19.jar ecj-4.3.1.jar castor-xml-1.3.3.ja
+ r castor-core-1.3.3.jar commons-lang-2.6.jar javax.inject-1.jar stax-
+ 1.2.0.jar stax-api-1.0.1.jar stax-api-1.0-2.jar spring-context-3.0.6.
+ RELEASE.jar spring-aop-3.0.6.RELEASE.jar aopalliance-1.0.jar spring-b
+ eans-3.0.6.RELEASE.jar spring-core-3.0.6.RELEASE.jar spring-expressio
+ n-3.0.6.RELEASE.jar spring-asm-3.0.6.RELEASE.jar jackson-core-2.1.4.j
+ ar jackson-databind-2.1.4.jar jackson-annotations-2.1.4.jar lucene-co
+ re-4.5.1.jar lucene-analyzers-common-4.5.1.jar lucene-queryparser-4.5
+ .1.jar lucene-queries-4.5.1.jar lucene-sandbox-4.5.1.jar jakarta-rege
+ xp-1.4.jar olap4j-0.9.7.309-JS-3.jar core-2.3.0.jar icu4j-57.1.jar gr
+ oovy-all-2.0.1.jar eclipselink-2.5.0.jar commonj.sdo-2.1.1.jar javax.
+ persistence-2.0.0.jar mysql-connector-java-5.1.6.jar towel-1.2.2.jar 
+Created-By: Apache Maven 3.5.2
+Build-Jdk: 1.8.0_141
+key: value
+url: C:\Program Files\DigitalPersona\Bin\Java\
+Main-Class: br.com.eteczonaleste.view.MainForm
+

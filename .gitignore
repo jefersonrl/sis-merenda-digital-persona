@@ -1,0 +1,6 @@
+lib/*
+*~
+*~
+target/*
+*.class
+*.jar
