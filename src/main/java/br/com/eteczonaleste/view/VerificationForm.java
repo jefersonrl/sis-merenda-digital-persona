@@ -51,83 +51,78 @@ public class VerificationForm<MemoryStream> extends CaptureForm {
 			// Compare the feature set with our template
 			DPFPVerificationResult result = null;
 			DPFPTemplate template = null;
-			this.alunosComDigitalReconhecidaNaUltimaVerificacao = new HashMap<Alunos, DPFPVerificationResult>();
+			
 			// DPFPTemplate t = DPFPGlobal.getTemplateFactory().createTemplate();
 			for (Alunos a : this.alunosCadastrados) {
 				// result = verificator.verify(features, ((MainForm)getOwner()).getTemplate());
-				System.out.println("Verificando aluno : " + a.getNome());
+				//System.out.println("Verificando aluno : " + a.getNome());
 				try {
 					template = DPFPGlobal.getTemplateFactory().createTemplate();
 					template.deserialize(a.getTemplate());
 
 					result = verificator.verify(features, template);
-					System.out.println("result.isVerified() = " + result.isVerified());
-					if (result.isVerified()) {
-						this.alunosComDigitalReconhecidaNaUltimaVerificacao.put(a, result);
+					//System.out.println("result.isVerified() = " + result.isVerified());
+					if (result.isVerified()) {						
+						processaResultadoDaVerificacao(a);
+						break;
 					}
-				} catch (Exception e) {
+				} catch (Exception e) {		
 					e.printStackTrace();
 				}
-				updateStatus(result.getFalseAcceptRate());
+				//updateStatus(result.getFalseAcceptRate());
 			}
 
-			processaResultadoDaVerificacao(this.alunosComDigitalReconhecidaNaUltimaVerificacao);
+			
 		}
 	}
 
-	private void processaResultadoDaVerificacao(
-			Map<Alunos, DPFPVerificationResult> alunosComDigitalReconhecidaNaUltimaVerificacao2) {
-		System.out.println();
-
-		if (alunosComDigitalReconhecidaNaUltimaVerificacao2.size() > 1) {
-			makeReport("ERRO: Mais de um aluno com a mesma digital");
-			Iterator<Alunos> iterator = alunosComDigitalReconhecidaNaUltimaVerificacao2.keySet().iterator();
-			String msg = "Alunos com digitais iguais: \n";
-			while (iterator.hasNext()) {
-				Alunos alunoComDigitalIgual = iterator.next();
-				msg += alunoComDigitalIgual.getNome() + ", ra:" + alunoComDigitalIgual.getRa() + "\n";
-			}
-			makeReport(msg);
-		} else if (alunosComDigitalReconhecidaNaUltimaVerificacao2.size() == 0) {
-			makeReport("DIGITAL NAO CORRESPONDE A NENHUMA PESSOA CADASTRADA");
-			setBackground(Color.red);
-			Toolkit.getDefaultToolkit().beep();
-		} else if (alunosComDigitalReconhecidaNaUltimaVerificacao2.size() == 1) {
-
-			Iterator<Alunos> iterator = alunosComDigitalReconhecidaNaUltimaVerificacao2.keySet().iterator();
-			Alunos alunoUnicoIdentificado = iterator.next();
+	private void processaResultadoDaVerificacao(Alunos a) {
+		
+//		if (alunosComDigitalReconhecidaNaUltimaVerificacao2.size() > 1) {
+//			makeReport("ERRO: Mais de um aluno com a mesma digital");
+//			Iterator<Alunos> iterator = alunosComDigitalReconhecidaNaUltimaVerificacao2.keySet().iterator();
+//			String msg = "Alunos com digitais iguais: \n";
+//			while (iterator.hasNext()) {
+//				Alunos alunoComDigitalIgual = iterator.next();
+//				msg += alunoComDigitalIgual.getNome() + ", ra:" + alunoComDigitalIgual.getRa() + "\n";
+//			}
+//			makeReport(msg);
+//		} else if (alunosComDigitalReconhecidaNaUltimaVerificacao2.size() == 0) {
+//			makeReport("DIGITAL NAO CORRESPONDE A NENHUMA PESSOA CADASTRADA");
+//			setBackground(Color.red);
+//			Toolkit.getDefaultToolkit().beep();
+//		} else if (alunosComDigitalReconhecidaNaUltimaVerificacao2.size() == 1) {
+//			Iterator<Alunos> iterator = alunosComDigitalReconhecidaNaUltimaVerificacao2.keySet().iterator();
+//			Alunos alunoUnicoIdentificado = iterator.next();
 
 			Entregas entrega = new Entregas();
 			entrega.setData_retirada(new Date());
 			entrega.setHora_retirada(new Date());
-			entrega.setRa(alunoUnicoIdentificado);
+			entrega.setRa(a);
 			EntregaManager entregaManager = new EntregaManager();
 
-			java.util.List entregasParaEsteAluno = entregaManager.verificaSeOAlunoJaAlmocou(alunoUnicoIdentificado);
-			System.out.println(entregasParaEsteAluno);
-
-			if (entregasParaEsteAluno.size() == 0) {
+			//java.util.List entregasParaEsteAluno = entregaManager.verificaSeOAlunoJaAlmocou(alunoUnicoIdentificado);
+			boolean jaAlmocou = entregaManager.verificaSeOAlunoJaAlmocou(a);
+			if(!jaAlmocou) {
 				entregaManager.insert(entrega);
-				makeReport(alunoUnicoIdentificado.getNome() + " - " + alunoUnicoIdentificado.getRa());
+				makeReport(a.getNome() + " - " + a.getRa());
 				setBackground(Color.green);
-
-				/*try {
-					Clip clip = AudioSystem.getClip();
-					AudioInputStream inputStream = AudioSystem
-							.getAudioInputStream(VerificationForm.class.getResourceAsStream("sons/" + "beep-07.wav"));
-					clip.open(inputStream);
-					clip.start();
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}*/
-
+//
+//				/*try {
+//					Clip clip = AudioSystem.getClip();
+//					AudioInputStream inputStream = AudioSystem
+//							.getAudioInputStream(VerificationForm.class.getResourceAsStream("sons/" + "beep-07.wav"));
+//					clip.open(inputStream);
+//					clip.start();
+//					
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}*/
+//
 			} else {
-				makeReport(alunoUnicoIdentificado.getNome() + " - " + alunoUnicoIdentificado.getRa()
-						+ " - ALUNO(A) JÁ ALMOÇOU");
+				makeReport(a.getNome() + " - " + a.getRa() + " - ALUNO(A) JÁ ALMOÇOU");
 				setBackground(Color.yellow);
 			}
-		}
 	}
 
 	private void updateStatus(int FAR) {

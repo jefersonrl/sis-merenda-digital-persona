@@ -4,3 +4,5 @@ lib/*
 target/*
 *.class
 *.jar
+
+**/**/*jasper

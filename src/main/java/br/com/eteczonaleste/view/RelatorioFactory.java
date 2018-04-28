@@ -229,7 +229,7 @@ public class RelatorioFactory {
 //                params);        
         
           gerarRelatorioWithInputStreamJasper(colectionDeEntregas, getFileInMetaInf(
-                  "RelatorioEntregasEntreDatas.jrxml.jasper"),
+                  "RelatorioEntregasEntreDatas.jasper"),
                    params);        
 
     }       

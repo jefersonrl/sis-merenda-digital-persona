@@ -54,7 +54,7 @@
 			<artifactId>dpfpenrollment</artifactId>
 			<scope>system</scope>
 			<version>1</version>
-			<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpfpenrollment.jar</systemPath>
+			<systemPath>C:/Program Files/DigitalPersona/Bin/Java/dpfpenrollment.jar</systemPath>			            
 		</dependency>
 
 		<dependency>
@@ -62,7 +62,7 @@
 			<artifactId>dpfpverification</artifactId>
 			<scope>system</scope>
 			<version>1</version>
-			<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpfpverification.jar</systemPath>
+			<systemPath>C:/Program Files/DigitalPersona/Bin/Java/dpfpverification.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -70,7 +70,7 @@
 			<artifactId>dpotapi</artifactId>
 			<scope>system</scope>
 			<version>1</version>
-			<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpotapi.jar</systemPath>
+			<systemPath>C:/Program Files/DigitalPersona/Bin/Java/dpotapi.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -78,7 +78,7 @@
 			<artifactId>dpotjni</artifactId>
 			<scope>system</scope>
 			<version>1</version>
-			<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpotjni.jar</systemPath>
+			<systemPath>C:/Program Files/DigitalPersona/Bin/Java/dpotjni.jar</systemPath>
 		</dependency>
 
 		<!-- mvn install:install-file -Dfile=/run/media/wagner/EE2437F12437BB81/wagnerdocri@gmail.com2/envs/env-dev/sources/sismerenda/lib/LIBS_Towel/towel-v1.2.2.jar 
@@ -109,7 +109,7 @@
 			</resource>
 			<resource>
 				<!--Folder with .jrxml report files -->
-				<directory>src/main/jrxmlfiles</directory>
+				<directory>src/main/resources/jrxmlfiles</directory>
 			</resource>
 		</resources>
 
@@ -132,23 +132,30 @@
 				<version>3.0.2</version>
 				<configuration>
 				<finalName>sismerenda</finalName> 
-					<archive>					
+<!--					
+				<archive>	
+
 						<manifestEntries>
 							<Class-Path>.:C:/PROGRA~1/DigitalPersona/Bin/Java/dpfpenrollment.jar:C:/PROGRA~1/DigitalPersona/Bin/Java/dpfpverification.jar:C:/PROGRA~1/DigitalPersona/Bin/Java/dpotapi.jar:C:/PROGRA~1/DigitalPersona/Bin/Java/dpotjni.jar</Class-Path>
 						</manifestEntries>
-					
+	-->				
+	<!--
 						<manifest>
-							<addClasspath>true</addClasspath> 	
+		-->					
 							<!-- 							
+							<addClasspath>true</addClasspath> 	
 							<mainClass>br.com.eteczonaleste.view.RelatorioEntregas</mainClass> 
 							<mainClass>br.com.eteczonaleste.view.MainForm</mainClass> 
 							
 							<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
 							-->							
+							<!--
 							<mainClass>br.com.eteczonaleste.view.Principal</mainClass> 
 							<classpathPrefix>classes.lib</classpathPrefix>
 						</manifest>
+						
 					</archive>
+					-->
 				</configuration>
 			</plugin>
 			
@@ -188,10 +195,12 @@
 							<mainClass>br.com.eteczonaleste.view.MainForm</mainClass> -->
 					<mainClass>br.com.eteczonaleste.view.Principal</mainClass>
 
-					<!-- <arguments> <argument>-classpath</argument> <argument>C:\Program 
-						Files\DigitalPersona\Bin\Java\dpfpenrollment.jar;C:\Program Files\DigitalPersona\Bin\Java\dpfpverification.jar;C:\Program 
-						Files\DigitalPersona\Bin\Java\dpotapi.jar;C:\Program Files\DigitalPersona\Bin\Java\dpotjni.jar</argument> 
-						</arguments> -->
+					<arguments> 
+						<argument>-classpath</argument> 
+						<argument>
+						C:/PROGRA~1/DigitalPersona/Bin/Java/dpfpenrollment.jar;C:/PROGRA~1/DigitalPersona/Bin/Java/dpfpverification.jar;C:/PROGRA~1/DigitalPersona/Bin/Java/dpotapi.jar;C:/PROGRA~1/DigitalPersona/Bin/Java/dpotjni.jar
+						</argument> 
+					</arguments>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -225,7 +234,6 @@
 						<scope>system</scope>
 						<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpotjni.jar</systemPath>
 					</dependency>
-
 				</dependencies>
 			</plugin>
 

@@ -3,6 +3,8 @@ package br.com.eteczonaleste.entityManager;
 import br.com.eteczonaleste.entity.Alunos;
 import br.com.eteczonaleste.entity.Entregas;
 import br.com.eteczonaleste.entity.Funcionarios;
+import br.com.eteczonaleste.view.Principal;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -21,34 +23,30 @@ import java.util.logging.Logger;
 
 public class EntregaManager {
 
-    EntityManagerFactory emf;
-    EntityManager em;
 
-    public EntregaManager() {
-        emf = Persistence.createEntityManagerFactory("e211PU");
-        em = emf.createEntityManager();
+    public EntregaManager() {       
     }
 
     public void insert(Entregas entrega) {
-        em.getTransaction().begin();
-        em.persist(entrega);
-        em.flush();
-        em.getTransaction().commit();
-        emf.close();
+        Principal.em.getTransaction().begin();
+        Principal.em.persist(entrega);
+        Principal.em.getTransaction().commit();
     }
     
-    public List verificaSeOAlunoJaAlmocou(Alunos nra){
+    public boolean verificaSeOAlunoJaAlmocou(Alunos nra){
     	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date dta = new Date();
         java.sql.Date sqlDate = new java.sql.Date(dta.getTime());
                 
-        Query entregaPesq = em.createQuery("SELECT e FROM Entregas e WHERE e.ra = :nra AND e.data_retirada = :data", Entregas.class);
+        Query entregaPesq = Principal.em.createQuery("SELECT count(e) FROM Entregas e WHERE e.ra = :nra AND e.data_retirada = :data", Entregas.class);
                entregaPesq.setParameter("data", sqlDate);
                entregaPesq.setParameter("nra", nra);
 
-        //ID, DATA_RETIRADA, HORA_RETIRADA, ra, ID_FUNCIONARIOS_ID
-        
-        return entregaPesq.getResultList();
+        //ID, DATA_RETIRADA, HORA_RETIRADA, ra, ID_FUNCIONARIOS_ID       
+        int qtdeAlmocos = Integer.parseInt(entregaPesq.getResultList().get(0).toString());
+        boolean result = qtdeAlmocos == 0 ? false : true;
+        System.out.println("Ja amocou ? "+result);
+        return result;
     }
 
     public List<Entregas> findSelectAll(String data) {
@@ -62,7 +60,7 @@ public class EntregaManager {
         }
 
         
-        Query entregaPesq = em.createQuery("SELECT e FROM Entregas e WHERE e.data_retirada = :data", Entregas.class);
+        Query entregaPesq = Principal.em.createQuery("SELECT e FROM Entregas e WHERE e.data_retirada = :data", Entregas.class);
                 entregaPesq.setParameter("data", dta);
 
         //ID, DATA_RETIRADA, HORA_RETIRADA, ra, ID_FUNCIONARIOS_ID
@@ -81,23 +79,22 @@ public class EntregaManager {
             Logger.getLogger(EntregaManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Query entregaPesq = (Query) em.createQuery("SELECT COUNT(a) FROM Entregas a WHERE a.data_retirada = :data")
+        Query entregaPesq = (Query) Principal.em.createQuery("SELECT COUNT(a) FROM Entregas a WHERE a.data_retirada = :data")
                 .setParameter("data", dta);
 
         return (Long) entregaPesq.getSingleResult();
     }
 
     public void delete(Entregas entrega) {
-        em.getTransaction().begin();
-        em.remove(entrega);
-        em.getTransaction().commit();
-        emf.close();
+        Principal.em.getTransaction().begin();
+        Principal.em.remove(entrega);
+        Principal.em.getTransaction().commit();        
     }
 
     public Collection<Entregas> execJpql(String jpql, Map<String,Object> parameters){
         List<Entregas> resultList = new ArrayList<Entregas>();
         
-        Query qry = (Query) em.createQuery(jpql);
+        Query qry = (Query) Principal.em.createQuery(jpql);
         
         if(!parameters.isEmpty()){
             Iterator<Map.Entry<String, Object>> iterator = parameters.entrySet().iterator();

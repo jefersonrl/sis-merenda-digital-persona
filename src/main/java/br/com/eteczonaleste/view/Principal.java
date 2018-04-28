@@ -1,16 +1,15 @@
 package br.com.eteczonaleste.view;
 
-import br.com.eteczonaleste.entity.Alunos;
-import br.com.eteczonaleste.entityManager.AlunosManager;
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import javax.swing.ImageIcon;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -18,7 +17,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import br.com.eteczonaleste.entity.Alunos;
+import br.com.eteczonaleste.entityManager.AlunosManager;
+
 public class Principal extends JFrame {
+
+	static EntityManagerFactory emf = Persistence.createEntityManagerFactory("e211PU");
+    static public EntityManager em = emf.createEntityManager();
 
     private JMenu menuCadastrar = new JMenu("Cadastrar");
     //private JMenu menuEditar = new JMenu("Editar");
@@ -70,8 +75,7 @@ public class Principal extends JFrame {
 
         menuItemEntrega.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    
+                try {                    
                     //Alterar
                     //Runtime.getRuntime().exec("C:\\biometria\\EnrollmentSample CS.exe");
                 	MainForm main = new MainForm();
