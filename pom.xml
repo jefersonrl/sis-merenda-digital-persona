@@ -190,51 +190,61 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
+				<configuration>					
 					<!-- <mainClass>br.com.eteczonaleste.view.RelatorioEntregas</mainClass> 
 							<mainClass>br.com.eteczonaleste.view.MainForm</mainClass> -->
 					<mainClass>br.com.eteczonaleste.view.Principal</mainClass>
-
-					<arguments> 
-						<argument>-classpath</argument> 
-						<argument>
-						C:/PROGRA~1/DigitalPersona/Bin/Java/dpfpenrollment.jar;C:/PROGRA~1/DigitalPersona/Bin/Java/dpfpverification.jar;C:/PROGRA~1/DigitalPersona/Bin/Java/dpotapi.jar;C:/PROGRA~1/DigitalPersona/Bin/Java/dpotjni.jar
-						</argument> 
-					</arguments>
+ 					<additionalClasspathElements>
+           				<additionalClasspathElement>
+                			C:\PROGRA~1\DigitalPersona\Bin\Java\dpfpverification.jar
+           				</additionalClasspathElement>
+           				<additionalClasspathElement>
+                			C:\PROGRA~1\DigitalPersona\Bin\Java\dpfpenrollment.jar
+           				</additionalClasspathElement>
+           				<additionalClasspathElement>
+                			C:\PROGRA~1\DigitalPersona\Bin\Java\dpotapi.jar
+           				</additionalClasspathElement>
+           				<additionalClasspathElement>
+                			C:\PROGRA~1\DigitalPersona\Bin\Java\dpotjni.jar
+           				</additionalClasspathElement>
+           				
+       				</additionalClasspathElements>
 				</configuration>
+				<!-- 
 				<dependencies>
 					<dependency>
-						<groupId>com.digitalpersona.onetouch</groupId>
+						<groupId>com.digitalpersona</groupId>
 						<artifactId>dpfpenrollment</artifactId>
-						<version>1.0</version>
+						<version>1</version>
 						<scope>system</scope>
 						<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpfpenrollment.jar</systemPath>
 					</dependency>
 
 					<dependency>
-						<groupId>com.digitalpersona.onetouch</groupId>
+						<groupId>com.digitalpersona</groupId>
 						<artifactId>dpfpverification</artifactId>
-						<version>1.0</version>
+						<version>1</version>
 						<scope>system</scope>
 						<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpfpverification.jar</systemPath>
 					</dependency>
 
 					<dependency>
-						<groupId>com.digitalpersona.onetouch</groupId>
+						<groupId>com.digitalpersona</groupId>
 						<artifactId>dpotapi</artifactId>
-						<version>1.0</version>
+						<version>1</version>
 						<scope>system</scope>
 						<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpotapi.jar</systemPath>
 					</dependency>
 
 					<dependency>
-						<groupId>com.digitalpersona.onetouch</groupId>
+						<groupId>com.digitalpersona</groupId>
 						<artifactId>dpotjni</artifactId>
-						<version>1.0</version>
+						<version>1</version>						
 						<scope>system</scope>
-						<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpotjni.jar</systemPath>
-					</dependency>
+						<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpotjni.jar</systemPath>						
+					</dependency>					 
 				</dependencies>
+				 -->
 			</plugin>
 
 			<plugin>
