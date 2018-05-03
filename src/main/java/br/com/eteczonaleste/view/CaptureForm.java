@@ -169,7 +169,7 @@ public class CaptureForm
 		prompt.setText(string);
 	}
 	public void makeReport(String string) {
-		log.append(string + "\n");
+		log.setText(string.toUpperCase() + "\n");
 	}
 	
 	public void drawPicture(Image image) {

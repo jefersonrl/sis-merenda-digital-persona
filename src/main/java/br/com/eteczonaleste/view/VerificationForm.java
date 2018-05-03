@@ -67,12 +67,12 @@ public class VerificationForm<MemoryStream> extends CaptureForm {
 						break;
 					}
 				} catch (Exception e) {		
-					e.printStackTrace();
+					e.printStackTrace();					
 				}
 				//updateStatus(result.getFalseAcceptRate());
+				setBackground(Color.red);
 			}
-
-			
+						
 		}
 	}
 
@@ -94,7 +94,7 @@ public class VerificationForm<MemoryStream> extends CaptureForm {
 //		} else if (alunosComDigitalReconhecidaNaUltimaVerificacao2.size() == 1) {
 //			Iterator<Alunos> iterator = alunosComDigitalReconhecidaNaUltimaVerificacao2.keySet().iterator();
 //			Alunos alunoUnicoIdentificado = iterator.next();
-
+		
 			Entregas entrega = new Entregas();
 			entrega.setData_retirada(new Date());
 			entrega.setHora_retirada(new Date());
@@ -103,10 +103,9 @@ public class VerificationForm<MemoryStream> extends CaptureForm {
 
 			//java.util.List entregasParaEsteAluno = entregaManager.verificaSeOAlunoJaAlmocou(alunoUnicoIdentificado);
 			boolean jaAlmocou = entregaManager.verificaSeOAlunoJaAlmocou(a);
-			if(!jaAlmocou) {
-				entregaManager.insert(entrega);
-				makeReport(a.getNome() + " - " + a.getRa());
-				setBackground(Color.green);
+			if(jaAlmocou) {
+				makeReport(a.getNome() + " - " + a.getRa() + " - ALUNO(A) JÁ ALMOÇOU");
+				setBackground(Color.YELLOW);
 //
 //				/*try {
 //					Clip clip = AudioSystem.getClip();
@@ -120,8 +119,9 @@ public class VerificationForm<MemoryStream> extends CaptureForm {
 //				}*/
 //
 			} else {
-				makeReport(a.getNome() + " - " + a.getRa() + " - ALUNO(A) JÁ ALMOÇOU");
-				setBackground(Color.yellow);
+				entregaManager.insert(entrega);
+				makeReport(a.getNome() + " - " + a.getRa());
+				setBackground(Color.green);
 			}
 	}
 
