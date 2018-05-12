@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -14,19 +15,20 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
 			<version>6.3.0</version>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
 			<version>2.0.1</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>eclipselink</artifactId>
@@ -37,6 +39,7 @@
 			<artifactId>javax.persistence</artifactId>
 			<version>2.0.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -54,7 +57,7 @@
 			<artifactId>dpfpenrollment</artifactId>
 			<scope>system</scope>
 			<version>1</version>
-			<systemPath>C:/Program Files/DigitalPersona/Bin/Java/dpfpenrollment.jar</systemPath>			            
+			<systemPath>C:/Program Files/DigitalPersona/Bin/Java/dpfpenrollment.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -131,54 +134,37 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.0.2</version>
 				<configuration>
-				<finalName>sismerenda</finalName> 
-<!--					
-				<archive>	
-
-						<manifestEntries>
-							<Class-Path>.:C:/PROGRA~1/DigitalPersona/Bin/Java/dpfpenrollment.jar:C:/PROGRA~1/DigitalPersona/Bin/Java/dpfpverification.jar:C:/PROGRA~1/DigitalPersona/Bin/Java/dpotapi.jar:C:/PROGRA~1/DigitalPersona/Bin/Java/dpotjni.jar</Class-Path>
-						</manifestEntries>
-	-->				
-	<!--
-						<manifest>
-		-->					
-							<!-- 							
-							<addClasspath>true</addClasspath> 	
-							<mainClass>br.com.eteczonaleste.view.RelatorioEntregas</mainClass> 
-							<mainClass>br.com.eteczonaleste.view.MainForm</mainClass> 
-							
-							<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-							-->							
-							<!--
-							<mainClass>br.com.eteczonaleste.view.Principal</mainClass> 
-							<classpathPrefix>classes.lib</classpathPrefix>
-						</manifest>
-						
-					</archive>
-					-->
+					<finalName>sismerenda</finalName>
+					<!-- <archive> <manifestEntries> <Class-Path>.:C:/PROGRA~1/DigitalPersona/Bin/Java/dpfpenrollment.jar:C:/PROGRA~1/DigitalPersona/Bin/Java/dpfpverification.jar:C:/PROGRA~1/DigitalPersona/Bin/Java/dpotapi.jar:C:/PROGRA~1/DigitalPersona/Bin/Java/dpotjni.jar</Class-Path> 
+						</manifestEntries> -->
+					<!-- <manifest> -->
+					<!-- <addClasspath>true</addClasspath> <mainClass>br.com.eteczonaleste.view.RelatorioEntregas</mainClass> 
+						<mainClass>br.com.eteczonaleste.view.MainForm</mainClass> <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile> -->
+					<!-- <mainClass>br.com.eteczonaleste.view.Principal</mainClass> <classpathPrefix>classes.lib</classpathPrefix> 
+						</manifest> </archive> -->
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
+				<artifactId>maven-dependency-plugin</artifactId>
 				<version>3.1.0</version>
-                <executions>
-                    <execution>
+				<executions>
+					<execution>
 						<id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.outputDirectory}.lib</outputDirectory>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}.lib</outputDirectory>
 							<overWriteReleases>false</overWriteReleases>
 							<overWriteSnapshots>false</overWriteSnapshots>
 							<overWriteIfNewer>true</overWriteIfNewer>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-			
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
@@ -190,61 +176,36 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>					
+				<configuration>
 					<!-- <mainClass>br.com.eteczonaleste.view.RelatorioEntregas</mainClass> 
-							<mainClass>br.com.eteczonaleste.view.MainForm</mainClass> -->
+						<mainClass>br.com.eteczonaleste.view.MainForm</mainClass> -->
 					<mainClass>br.com.eteczonaleste.view.Principal</mainClass>
- 					<additionalClasspathElements>
-           				<additionalClasspathElement>
-                			C:\PROGRA~1\DigitalPersona\Bin\Java\dpfpverification.jar
-           				</additionalClasspathElement>
-           				<additionalClasspathElement>
-                			C:\PROGRA~1\DigitalPersona\Bin\Java\dpfpenrollment.jar
-           				</additionalClasspathElement>
-           				<additionalClasspathElement>
-                			C:\PROGRA~1\DigitalPersona\Bin\Java\dpotapi.jar
-           				</additionalClasspathElement>
-           				<additionalClasspathElement>
-                			C:\PROGRA~1\DigitalPersona\Bin\Java\dpotjni.jar
-           				</additionalClasspathElement>
-           				
-       				</additionalClasspathElements>
+					<additionalClasspathElements>
+						<additionalClasspathElement>
+							C:\PROGRA~1\DigitalPersona\Bin\Java\dpfpverification.jar
+						</additionalClasspathElement>
+						<additionalClasspathElement>
+							C:\PROGRA~1\DigitalPersona\Bin\Java\dpfpenrollment.jar
+						</additionalClasspathElement>
+						<additionalClasspathElement>
+							C:\PROGRA~1\DigitalPersona\Bin\Java\dpotapi.jar
+						</additionalClasspathElement>
+						<additionalClasspathElement>
+							C:\PROGRA~1\DigitalPersona\Bin\Java\dpotjni.jar
+						</additionalClasspathElement>
+
+					</additionalClasspathElements>
 				</configuration>
-				<!-- 
-				<dependencies>
-					<dependency>
-						<groupId>com.digitalpersona</groupId>
-						<artifactId>dpfpenrollment</artifactId>
-						<version>1</version>
-						<scope>system</scope>
-						<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpfpenrollment.jar</systemPath>
-					</dependency>
-
-					<dependency>
-						<groupId>com.digitalpersona</groupId>
-						<artifactId>dpfpverification</artifactId>
-						<version>1</version>
-						<scope>system</scope>
-						<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpfpverification.jar</systemPath>
-					</dependency>
-
-					<dependency>
-						<groupId>com.digitalpersona</groupId>
-						<artifactId>dpotapi</artifactId>
-						<version>1</version>
-						<scope>system</scope>
-						<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpotapi.jar</systemPath>
-					</dependency>
-
-					<dependency>
-						<groupId>com.digitalpersona</groupId>
-						<artifactId>dpotjni</artifactId>
-						<version>1</version>						
-						<scope>system</scope>
-						<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpotjni.jar</systemPath>						
-					</dependency>					 
-				</dependencies>
-				 -->
+				<!-- <dependencies> <dependency> <groupId>com.digitalpersona</groupId> 
+					<artifactId>dpfpenrollment</artifactId> <version>1</version> <scope>system</scope> 
+					<systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpfpenrollment.jar</systemPath> 
+					</dependency> <dependency> <groupId>com.digitalpersona</groupId> <artifactId>dpfpverification</artifactId> 
+					<version>1</version> <scope>system</scope> <systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpfpverification.jar</systemPath> 
+					</dependency> <dependency> <groupId>com.digitalpersona</groupId> <artifactId>dpotapi</artifactId> 
+					<version>1</version> <scope>system</scope> <systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpotapi.jar</systemPath> 
+					</dependency> <dependency> <groupId>com.digitalpersona</groupId> <artifactId>dpotjni</artifactId> 
+					<version>1</version> <scope>system</scope> <systemPath>C:\Program Files\DigitalPersona\Bin\Java\dpotjni.jar</systemPath> 
+					</dependency> </dependencies> -->
 			</plugin>
 
 			<plugin>
@@ -262,12 +223,14 @@
 									classpathref="maven.compile.classpath" />
 								<echo>===================================</echo>
 								<echo>base directory is ${project.basedir}</echo>
-								<jrc srcdir="${project.basedir}/src/main/resources/jrxmlfiles/*"
+								<jrc
+									srcdir="${project.basedir}/src/main/resources/jrxmlfiles/*"
 									destdir="${project.basedir}/src/main/resources/META-INF"
 									tempdir="${project.basedir}/src/main/resources/META-INF"
 									keepjava="false">
 									<src>
-										<fileset dir="${project.basedir}/src/main/resources/jrxmlfiles">
+										<fileset
+											dir="${project.basedir}/src/main/resources/jrxmlfiles">
 											<include name="**/*.jrxml" />
 										</fileset>
 									</src>

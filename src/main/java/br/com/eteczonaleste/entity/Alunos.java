@@ -1,12 +1,19 @@
-package br.com.eteczonaleste.entity;
+ package br.com.eteczonaleste.entity;
+
+import java.io.Serializable;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "alunos")
-public class Alunos {
+public class Alunos implements Serializable{
 
-     @Id
+     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Id
     private Integer ra;
     @Column
     private String nome;
@@ -30,7 +37,16 @@ public class Alunos {
     @Lob
     private byte[] template;
 
-   
+    private Integer status;
+    
+
+    public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
     public Integer getRa() {
         return ra;

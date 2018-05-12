@@ -5,6 +5,9 @@ import br.com.eteczonaleste.entity.Entregas;
 import br.com.eteczonaleste.entity.Funcionarios;
 import br.com.eteczonaleste.view.Principal;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,12 +37,12 @@ public class EntregaManager {
 			Principal.registraEntregaNoArquivoDeEntregasDoDia(entrega);
 			Principal.em.getTransaction().commit();
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 
 	public boolean verificaSeOAlunoJaAlmocou(Alunos nra) {
-
+		System.out.println(nra+"public boolean verificaSeOAlunoJaAlmocou(Alunos "+nra.getRa()+") {...");
 //		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 //		Date dta = new Date();
 //		java.sql.Date sqlDate = new java.sql.Date(dta.getTime());
@@ -55,14 +58,38 @@ public class EntregaManager {
 		
 		boolean result = false;
 		String line;
+		System.out.println("antes de entrar no try");
 		try {
-			while ((line = Principal.bufferedReader4ArqEntregasDoDia.readLine()) != null) {
-			    if(Integer.parseInt(line.split(";")[0]) == nra.getRa()) return true; 
-			    else return false;
+			
+			System.out.println("entrou no try...");	
+			FileReader fr = new FileReader(Principal.arqDeEntregasDoDia);			
+			BufferedReader br = new BufferedReader(fr);
+			
+			while ((line = br.readLine())!= null) {
+				System.out.println("entrou no while..");
+				System.out.println("line = br.readLine() -> "+line);
+				String lineNo = line.split(";")[2];
+				System.out.println("linha lida = "+line+" "+lineNo);
+				String strRa = line.split(";")[0];
+				System.out.println("strRa="+strRa);
+				int intRa = Integer.parseInt(strRa);
+				System.out.println("intRa="+intRa);
+				int alunoRa = nra.getRa();
+				System.out.println("alunoRa="+alunoRa);
+			    if(intRa == alunoRa) {
+			    	System.out.println(intRa+"=="+alunoRa+":True");
+			    	return true; 
+			    }else {
+			    	System.out.println(intRa+"=="+alunoRa+":False");
+			    	result = false;
+			    }			    
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
+			System.out.println("} catch (IOException e) {....");			
 			e.printStackTrace();
-		}		
+		}	
+		
+		System.out.println("retornando false porque nem analisou o arquivo");
 		return result;
 	}
 

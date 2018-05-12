@@ -1,26 +1,23 @@
 package br.com.eteczonaleste.view;
 
-import com.digitalpersona.onetouch.*;
+import java.awt.Color;
+import java.awt.Frame;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Map;
 
-import com.digitalpersona.onetouch.verification.*;
+import com.digitalpersona.onetouch.DPFPDataPurpose;
+import com.digitalpersona.onetouch.DPFPFeatureSet;
+import com.digitalpersona.onetouch.DPFPGlobal;
+import com.digitalpersona.onetouch.DPFPSample;
+import com.digitalpersona.onetouch.DPFPTemplate;
+import com.digitalpersona.onetouch.verification.DPFPVerification;
+import com.digitalpersona.onetouch.verification.DPFPVerificationResult;
 
 import br.com.eteczonaleste.entity.Alunos;
 import br.com.eteczonaleste.entity.Entregas;
 import br.com.eteczonaleste.entityManager.AlunosManager;
 import br.com.eteczonaleste.entityManager.EntregaManager;
-
-import java.awt.*;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-
-import org.eclipse.jdt.internal.compiler.batch.Main;
 
 public class VerificationForm<MemoryStream> extends CaptureForm {
 	private DPFPVerification verificator = DPFPGlobal.getVerificationFactory().createVerification();
@@ -28,8 +25,9 @@ public class VerificationForm<MemoryStream> extends CaptureForm {
 	public Map<Alunos, DPFPVerificationResult> alunosComDigitalReconhecidaNaUltimaVerificacao;
 
 	VerificationForm(Frame owner) {
-		super(owner);
-		alunosCadastrados = new AlunosManager().findSelectAll();
+		super(owner);	
+		alunosCadastrados = new AlunosManager().findSelectAtivos();
+		System.out.println("alunosCadastrados.size()="+alunosCadastrados.size());
 	}
 
 	@Override
@@ -67,7 +65,7 @@ public class VerificationForm<MemoryStream> extends CaptureForm {
 						break;
 					}
 				} catch (Exception e) {		
-					e.printStackTrace();					
+					//e.printStackTrace();					
 				}
 				//updateStatus(result.getFalseAcceptRate());
 				setBackground(Color.red);
@@ -103,6 +101,7 @@ public class VerificationForm<MemoryStream> extends CaptureForm {
 
 			//java.util.List entregasParaEsteAluno = entregaManager.verificaSeOAlunoJaAlmocou(alunoUnicoIdentificado);
 			boolean jaAlmocou = entregaManager.verificaSeOAlunoJaAlmocou(a);
+			System.out.println("boolean jaAlmocou "+jaAlmocou);
 			if(jaAlmocou) {
 				makeReport(a.getNome() + " - " + a.getRa() + " - ALUNO(A) JÁ ALMOÇOU");
 				setBackground(Color.YELLOW);
@@ -119,7 +118,9 @@ public class VerificationForm<MemoryStream> extends CaptureForm {
 //				}*/
 //
 			} else {
+				System.out.println("-----antes do insert");
 				entregaManager.insert(entrega);
+				System.out.println("depois do insert");
 				makeReport(a.getNome() + " - " + a.getRa());
 				setBackground(Color.green);
 			}

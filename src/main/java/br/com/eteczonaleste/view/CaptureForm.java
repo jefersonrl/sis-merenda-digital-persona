@@ -105,7 +105,7 @@ public class CaptureForm
 				SwingUtilities.invokeLater(new Runnable() {	public void run() {
 					makeReport("As amostras de impressões digitais foram capturadas.");
 					setPrompt("\r\n" + "Digitalize a impressão digital novamente.");
-					process(e.getSample());
+ 					process(e.getSample());
 				}});
 			}
 		});

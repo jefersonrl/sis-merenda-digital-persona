@@ -61,4 +61,9 @@ public class AlunosManager {
     	br.com.eteczonaleste.view.Principal.em.getTransaction().commit();    	
     }
 
+	public  Collection<Alunos> findSelectAtivos() {
+		Query alunoPesq = br.com.eteczonaleste.view.Principal.em.createQuery("SELECT s FROM Alunos s where s.status = 1");        
+        return (Collection<Alunos>) alunoPesq.getResultList();
+	}
+
 }

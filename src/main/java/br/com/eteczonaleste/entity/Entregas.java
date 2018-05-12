@@ -1,5 +1,6 @@
 package br.com.eteczonaleste.entity;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Column;
@@ -15,9 +16,15 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "entregas")
-public class Entregas {
+public class Entregas implements Serializable{
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -33,8 +40,9 @@ public class Entregas {
 
     @Temporal(TemporalType.TIME)
     private Date hora_retirada;
+    
 
-    public int getId() {
+	public int getId() {
         return id;
     }
 

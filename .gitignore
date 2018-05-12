@@ -7,5 +7,5 @@ target/*
 
 **/**/*jasper
 /target/
-
+*.zip
 *.txt

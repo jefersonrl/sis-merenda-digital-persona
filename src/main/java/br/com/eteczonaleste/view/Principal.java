@@ -14,7 +14,6 @@ import java.io.FileReader;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -28,9 +27,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
-import br.com.eteczonaleste.entity.Alunos;
 import br.com.eteczonaleste.entity.Entregas;
-import br.com.eteczonaleste.entityManager.AlunosManager;
+
+//import br.com.eteczonaleste.entity.Alunos;
+//import br.com.eteczonaleste.entity.Entregas;
+//import br.com.eteczonaleste.entityManager.AlunosManager;
 
 public class Principal extends JFrame {
 
@@ -39,14 +40,13 @@ public class Principal extends JFrame {
 
 	static SimpleDateFormat formatadorDeData = new SimpleDateFormat("dd-MM-yyyy");
 	static SimpleDateFormat formatadorDeHoras = new SimpleDateFormat("HH:mm:ss");
-	static File arqDeEntregasDoDia = Principal.criaArquivoDeEntregasDoDia();
+	
+	public static File arqDeEntregasDoDia = Principal.criaArquivoDeEntregasDoDia();
 	static PrintStream fileStream4ArqDeEntregasDoDia = Principal.escritorDeLinhaDoArquivoDeEntregas();
 
-	static FileReader fileReader4ArqEntregasDoDia = criaReaderDoArquivoDeEntregasDoDia();
-	public static BufferedReader bufferedReader4ArqEntregasDoDia = new BufferedReader(fileReader4ArqEntregasDoDia);
+	//public static FileReader fileReader4ArqEntregasDoDia = criaReaderDoArquivoDeEntregasDoDia();
+	//public static BufferedReader bufferedReader4ArqEntregasDoDia = new BufferedReader(fileReader4ArqEntregasDoDia);
 
-
-	
 	
 	private JMenu menuCadastrar = new JMenu("Cadastrar");
 	// private JMenu menuEditar = new JMenu("Editar");
@@ -71,9 +71,11 @@ public class Principal extends JFrame {
 	ImageIcon icon = new ImageIcon("imagens/leituras.png");
 	JLabel label = new JLabel(icon);
 
+	private static int templineNumber=0;
+	
 	public Principal() {
 		super("Sistema de Controle v2.0 - 211 - ETEC Zona Leste");
-
+		
 		// adicona os JMenuItem no JMenu
 		menuCadastrar.add(menuItemCadastrarAluno);
 		// menuCadastrar.add(menuItemCadastrarBiometria);
@@ -111,15 +113,17 @@ public class Principal extends JFrame {
 		menuItemCadastrarBiometria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					AlunosManager alunosManager = new AlunosManager();
-					Alunos aluno = new Alunos();
-
-					int rm = Integer.parseInt(JOptionPane.showInputDialog("Digite o RM do Aluno a ser cadastrado"));
-					System.out.println(rm);
-					aluno = alunosManager.findByRm(rm);
-
-					JOptionPane.showMessageDialog(null, "Aluno(a) cadastrado(a) na tabela verifica");
-
+//*					
+//					AlunosManager alunosManager = new AlunosManager();
+//					Alunos aluno = new Alunos();
+//
+//					int rm = Integer.parseInt(JOptionPane.showInputDialog("Digite o RM do Aluno a ser cadastrado"));
+//					System.out.println(rm);
+//					aluno = alunosManager.findByRm(rm);
+//
+//					JOptionPane.showMessageDialog(null, "Aluno(a) cadastrado(a) na tabela verifica");
+//
+					
 					// Alterar
 					// Runtime.getRuntime().exec("cmd.exe cd C:\\GrFinger\\Captura\\bin\\ & /c
 					// 'start captura.exe'");
@@ -169,7 +173,7 @@ public class Principal extends JFrame {
 
 		menuItemSobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Sobre sobre = new Sobre();
+				//Sobre sobre = new Sobre();
 			}
 		});
 
@@ -197,17 +201,7 @@ public class Principal extends JFrame {
 		// this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	}
-
-	private static FileReader criaReaderDoArquivoDeEntregasDoDia() {
-		FileReader fileReader = null;
-		try {			
-			fileReader = new FileReader(Principal.arqDeEntregasDoDia);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return fileReader;
-	}
-
+	
 	private static File criaArquivoDeEntregasDoDia() {
 		String nomeDoArqDeEntregas = "EntregasDeHoje_" + formatadorDeData.format(new Date()) + ".txt";
 		return new File(nomeDoArqDeEntregas);
@@ -215,8 +209,7 @@ public class Principal extends JFrame {
 
 	private static PrintStream escritorDeLinhaDoArquivoDeEntregas() {
 		PrintStream printStream = null;
-		try {
-			//printStream = new PrintStream(Principal.arqDeEntregasDoDia);
+		try {			
 			printStream = new PrintStream(
 					new BufferedOutputStream(
 							new FileOutputStream(Principal.arqDeEntregasDoDia, true)));
@@ -230,24 +223,16 @@ public class Principal extends JFrame {
 	}
 
 	public static void main(String args[]) {
-		Principal principal = new Principal();
-		Entregas entregas = new Entregas();
-		entregas.setData_retirada(new Date());
-		entregas.setHora_retirada(new Date());
-		Alunos aluno = new Alunos();
-		aluno.setRa(1234);
-		entregas.setRa(aluno);
-		registraEntregaNoArquivoDeEntregasDoDia(entregas);
-		registraEntregaNoArquivoDeEntregasDoDia(entregas);
-		registraEntregaNoArquivoDeEntregasDoDia(entregas);
-		registraEntregaNoArquivoDeEntregasDoDia(entregas);
+		Principal principal = new Principal();	
 	}
 
 	public static void registraEntregaNoArquivoDeEntregasDoDia(Entregas entrega) {
+		Principal.templineNumber++;
+		System.out.println("Principal.templineNumber="+Principal.templineNumber);
 		String sep = ";";
 		String ra = entrega.getRa().getRa().toString();
 		String h = formatadorDeHoras.format(entrega.getHora_retirada());
-		String registro = ra + sep + h;
+		String registro = ra + sep + h + sep + Principal.templineNumber;
 		try {			
 			fileStream4ArqDeEntregasDoDia.println(registro);
 			fileStream4ArqDeEntregasDoDia.flush();
