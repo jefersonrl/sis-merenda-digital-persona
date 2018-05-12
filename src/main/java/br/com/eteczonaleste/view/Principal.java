@@ -27,7 +27,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import br.com.eteczonaleste.entity.Alunos;
 import br.com.eteczonaleste.entity.Entregas;
+import br.com.eteczonaleste.entityManager.AlunosManager;
 
 //import br.com.eteczonaleste.entity.Alunos;
 //import br.com.eteczonaleste.entity.Entregas;
@@ -113,22 +115,16 @@ public class Principal extends JFrame {
 		menuItemCadastrarBiometria.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-//*					
-//					AlunosManager alunosManager = new AlunosManager();
-//					Alunos aluno = new Alunos();
-//
-//					int rm = Integer.parseInt(JOptionPane.showInputDialog("Digite o RM do Aluno a ser cadastrado"));
-//					System.out.println(rm);
-//					aluno = alunosManager.findByRm(rm);
-//
-//					JOptionPane.showMessageDialog(null, "Aluno(a) cadastrado(a) na tabela verifica");
-//
 					
-					// Alterar
-					// Runtime.getRuntime().exec("cmd.exe cd C:\\GrFinger\\Captura\\bin\\ & /c
-					// 'start captura.exe'");
-					// Runtime.getRuntime().exec("c:\\GrFinger\\Captura\\bin\\captura.exe");
+					AlunosManager alunosManager = new AlunosManager();
+					Alunos aluno = new Alunos();
 
+					int rm = Integer.parseInt(JOptionPane.showInputDialog("Digite o RM do Aluno a ser cadastrado"));
+					System.out.println(rm);
+					aluno = alunosManager.findByRm(rm);
+
+					JOptionPane.showMessageDialog(null, "Aluno(a) cadastrado(a) na tabela verifica");
+					
 				} catch (Throwable ex) {
 					ex.printStackTrace();
 				}

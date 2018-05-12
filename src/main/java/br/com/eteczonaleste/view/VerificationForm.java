@@ -6,6 +6,10 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 import com.digitalpersona.onetouch.DPFPDataPurpose;
 import com.digitalpersona.onetouch.DPFPFeatureSet;
 import com.digitalpersona.onetouch.DPFPGlobal;
@@ -105,22 +109,34 @@ public class VerificationForm<MemoryStream> extends CaptureForm {
 			if(jaAlmocou) {
 				makeReport(a.getNome() + " - " + a.getRa() + " - ALUNO(A) JÁ ALMOÇOU");
 				setBackground(Color.YELLOW);
-//
-//				/*try {
-//					Clip clip = AudioSystem.getClip();
-//					AudioInputStream inputStream = AudioSystem
-//							.getAudioInputStream(VerificationForm.class.getResourceAsStream("sons/" + "beep-07.wav"));
-//					clip.open(inputStream);
-//					clip.start();
-//					
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}*/
-//
+				
+				try {
+					Clip clip = AudioSystem.getClip();
+					AudioInputStream inputStream = AudioSystem
+							.getAudioInputStream(VerificationForm.class.getClassLoader().getResourceAsStream("error.wav"));
+					clip.open(inputStream);
+					clip.start();					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				
 			} else {
 				System.out.println("-----antes do insert");
 				entregaManager.insert(entrega);
 				System.out.println("depois do insert");
+
+				try {
+					Clip clip = AudioSystem.getClip();
+					AudioInputStream inputStream = AudioSystem
+							.getAudioInputStream(VerificationForm.class.getClassLoader().getResourceAsStream("okletsgo.wav"));
+					clip.open(inputStream);
+					clip.start();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
 				makeReport(a.getNome() + " - " + a.getRa());
 				setBackground(Color.green);
 			}
