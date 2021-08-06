@@ -4,7 +4,6 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>br.com.eteczonaleste.entity.Alunos</class>
     <class>br.com.eteczonaleste.entity.Funcionarios</class>
-    <class>br.com.eteczonaleste.entity.Verifica</class>
     <class>br.com.eteczonaleste.entity.Entregas</class>
     
     <properties>
